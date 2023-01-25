@@ -1,0 +1,5 @@
+package progfun
+
+trait Output {
+
+}
