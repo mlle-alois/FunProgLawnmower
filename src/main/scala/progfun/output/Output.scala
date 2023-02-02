@@ -1,5 +1,5 @@
 package progfun.output
 
-trait Output extends Serializable {
-
+trait Output[A,B] {
+  def serialize(a:A):B
 }

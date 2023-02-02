@@ -1,8 +1,8 @@
 package example
 
-import scala.io.StdIn
-
 import com.typesafe.config.{Config, ConfigFactory}
+
+import scala.io.StdIn
 
 // Lancer l'exemple avec: sbt "runMain example.Hello"
 // TODO: a supprimer
