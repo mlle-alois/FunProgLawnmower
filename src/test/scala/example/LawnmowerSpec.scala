@@ -25,4 +25,12 @@ class LawnmowerSpec extends AnyFunSuite {
     assert(finalPosition.orientation == testedPosition.orientation)
   }
 
+  test("Lawnmower 2 final position is right") {
+    val finalPosition = lawnmower2.followInstructions(grass)
+    val testedPosition = new Position(new Coordinate(5, 1), "E")
+    assert(finalPosition.coordinate.x == testedPosition.coordinate.x)
+    assert(finalPosition.coordinate.y == testedPosition.coordinate.y)
+    assert(finalPosition.orientation == testedPosition.orientation)
+  }
+
 }

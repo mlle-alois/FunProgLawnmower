@@ -1,16 +1,19 @@
 package example.output
 
+import org.scalactic.TypeCheckedTripleEquals.convertToCheckingEqualizer
 import org.scalatest.funsuite.AnyFunSuite
+import play.api.libs.json
 import play.api.libs.json.Json
-import progfun.Grass
+import progfun.{Coordinate, Grass, Instructions, Lawnmower, Position}
 import progfun.output.JsonOutput
-import progfun.output.JsonOutput.grassSerializer
+import progfun.output.JsonOutput.{grassSerializer}
 
 class Json extends AnyFunSuite {
 
-  test("Should create a json grass string") {
+  test("Should create a json grass object") {
     val grass: Grass = new Grass(5, 5)
-    val json = JsonOutput.serialize(grass)
+    val lawnmower1 = new Lawnmower(new Position(new Coordinate(1, 2), "N"), new Instructions("GAGAGAGAA"))
+    val lawnmower2 = new Lawnmower(new Position(new Coordinate(3, 3), "E"), new Instructions("AADAADADDA"))
     val result =         Json.obj( "limite" -> Json.obj(
       "x" -> 5
       ,
@@ -19,11 +22,6 @@ class Json extends AnyFunSuite {
 
     assert( json === result)
   }
-  test("Should create a json  string") {
-    val grass: Grass = new Grass(5, 5)
-    val json = JsonOutput.serialize(grass)
 
-    assert( json.toString() === "{\"width\":5,\"height\":5}")
-  }
 
 }

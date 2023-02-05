@@ -1,6 +1,6 @@
 package progfun
 
-class Lawnmower(val currentPosition: Position, val instructions: Instructions) {
+class Lawnmower(val currentPosition: Position, val instructions: Instructions, val finalPosition: Position) {
   def followInstructions(grass: Grass): Position = {
     instructions.value.foldLeft(currentPosition) { (position, instruction) =>
       instruction match {
@@ -44,4 +44,5 @@ class Lawnmower(val currentPosition: Position, val instructions: Instructions) {
     }
     new Position(position.coordinate, newOrientation)
   }
+
 }
