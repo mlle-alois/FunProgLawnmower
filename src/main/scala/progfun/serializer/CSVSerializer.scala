@@ -1,16 +1,16 @@
-package progfun.output
+package progfun.serializer
 
 import progfun.{Grass, Lawnmower}
 
-object CSVOutput {
+object CSVSerializer {
   // serialize dynamique
   def serialize[A, B](grass: A, lawnmowers: B)(
-    implicit serializer: Output[A, B, String]
+    implicit serializer: OutputSerializer[A, B, String]
   ): String =
     serializer.serialize(grass, lawnmowers)
 
   implicit val lawnmowersSerializer
-  : Output[Grass, List[Lawnmower], String] = {
+  : OutputSerializer[Grass, List[Lawnmower], String] = {
     (grass: Grass, lawnmowers: List[Lawnmower]) => {
       List("numéro;", "taille_x;", "taille_y;", "début_x;", "début_y;", "début_direction;", "fin_x;", "fin_y;", "fin_direction;", "instructions;", "\n", lawnmowers.zipWithIndex.map {
         case (lawnmower, index) =>

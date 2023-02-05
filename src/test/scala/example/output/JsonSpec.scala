@@ -2,8 +2,8 @@ package example.output
 
 import org.scalatest.funsuite.AnyFunSuite
 import play.api.libs.json.Json
-import progfun.output.JsonOutput
-import progfun.output.JsonOutput.lawnmowersSerializer
+import progfun.serializer.JsonSerializer.lawnmowersSerializer
+import progfun.serializer.JsonSerializer
 import progfun.{Coordinate, Grass, Instructions, Lawnmower, Position}
 
 class JsonSpec extends AnyFunSuite {
@@ -44,7 +44,7 @@ class JsonSpec extends AnyFunSuite {
         }
     )
 
-    val jsonValue = JsonOutput.serialize(grass, lawnmowers)
+    val jsonValue = JsonSerializer.serialize(grass, lawnmowers)
 
     assert(jsonValue === result)
   }

@@ -1,19 +1,18 @@
-package progfun.output
+package progfun.serializer
 
-import play.api.libs.json.{JsValue, Json}
+import play.api.libs.json.Json
 import progfun.{Grass, Lawnmower}
 
-object JsonOutput {
+object JsonSerializer {
   // serialize dynamique
   def serialize[A, B](grass: A, lawnmowers: B)(
-    implicit serializer: Output[A, B, JsValue]
-  ): JsValue =
+    implicit serializer: OutputSerializer[A, B, String]
+  ): String =
     serializer.serialize(grass, lawnmowers)
 
-  implicit val lawnmowersSerializer
-  : Output[Grass, List[Lawnmower], JsValue] = {
+  implicit val lawnmowersSerializer: OutputSerializer[Grass, List[Lawnmower], String] = {
     (grass: Grass, lawnmowers: List[Lawnmower]) => {
-      Json.obj(
+      Json.prettyPrint(Json.obj(
         "limite" -> Json.obj(
           "x" -> grass.width,
           "y" -> grass.height
@@ -39,7 +38,7 @@ object JsonOutput {
                 )
               )
           }
-      )
+      ))
     }
   }
 
