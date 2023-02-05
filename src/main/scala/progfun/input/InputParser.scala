@@ -18,7 +18,7 @@ class InputParser() {
       val lawnmowers = parseLawnmowers(lines.drop(1))
       new Input(grass, lawnmowers)
     } catch {
-      case e: Exception => throw IncorrectDataException("No file or incorrect data in file: " + fileName + " " + e.getMessage)
+      case e: Exception => throw IncorrectDataException("No file with this name or incorrect data in file: " + fileName + " " + e.getMessage)
     }
   }
 
