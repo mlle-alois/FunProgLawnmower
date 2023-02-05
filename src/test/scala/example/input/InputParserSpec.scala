@@ -1,4 +1,5 @@
 package example.input
+
 import org.scalatest.funsuite.AnyFunSuite
 import progfun.input.{Input, InputParser}
 
