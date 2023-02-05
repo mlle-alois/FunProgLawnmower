@@ -43,26 +43,4 @@ object JsonOutput {
     }
   }
 
-  /*implicit val lawnmowerSerializer
-      : Output[Grass, Map[Lawnmower, Position], JsValue] = {
-    new Output[Lawnmower, JsValue] {
-      def serialize(lawnmower: Lawnmower, grass: Grass): JsValue = {
-        Json.obj(
-          "tondeuses" -> Json.arr(
-            "debut" -> Json.obj(
-              "point" -> Json.obj(
-                "x" -> lawnmower.currentPosition.coordinate.x,
-                "y" -> lawnmower.currentPosition.coordinate.y
-              ),
-              "direction" -> lawnmower.currentPosition.orientation
-            ),
-            "instructions" -> lawnmower.instructions.value
-          )
-        )
-      }
-
-    }
-
-  }*/
-
 }
