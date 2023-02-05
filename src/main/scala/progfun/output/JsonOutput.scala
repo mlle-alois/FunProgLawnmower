@@ -1,48 +1,46 @@
 package progfun.output
 
 import play.api.libs.json.{JsValue, Json}
-import progfun.{Grass, Lawnmower, Position}
+import progfun.{Grass, Lawnmower}
 
 object JsonOutput {
   // serialize dynamique
   def serialize[A, B](grass: A, lawnmowers: B)(
-      implicit serializer: Output[A, B, JsValue]
+    implicit serializer: Output[A, B, JsValue]
   ): JsValue =
     serializer.serialize(grass, lawnmowers)
 
-  // On va rajouter des types qu'on puisse sérialiser
-  implicit val grassSerializer
-      : Output[Grass, Map[Lawnmower, Position], JsValue] = {
-    new Output[Grass, Map[Lawnmower, Position], JsValue] {
-      def serialize(
-          grass: Grass,
-          lawnmowers: Map[Lawnmower, Position]
-      ): JsValue = {
-        Json.obj(
-          "limite" -> Json.obj(
-            "x" -> grass.width,
-            "y" -> grass.height
-          ),
-          "tondeuses" -> Json.arr(
-            lawnmowers.map {
-              case (lawnmower, position) =>
-                Json.obj(
-                  "debut" -> Json.obj(
-                    "point" -> Json.obj(
-                      "x" -> position.coordinate.x,
-                      "y" -> position.coordinate.y
-                    ),
-                    "direction" -> position.orientation
+  implicit val lawnmowersSerializer
+  : Output[Grass, List[Lawnmower], JsValue] = {
+    (grass: Grass, lawnmowers: List[Lawnmower]) => {
+      Json.obj(
+        "limite" -> Json.obj(
+          "x" -> grass.width,
+          "y" -> grass.height
+        ),
+        "tondeuses" ->
+          lawnmowers.map {
+            lawnmower =>
+              Json.obj(
+                "debut" -> Json.obj(
+                  "point" -> Json.obj(
+                    "x" -> lawnmower.currentPosition.coordinate.x,
+                    "y" -> lawnmower.currentPosition.coordinate.y
                   ),
-                  "instructions" -> lawnmower.instructions.value
+                  "direction" -> lawnmower.currentPosition.orientation
+                ),
+                "instructions" -> lawnmower.instructions.value.split(""),
+                "fin" -> Json.obj(
+                  "point" -> Json.obj(
+                    "x" -> lawnmower.finalPosition.coordinate.x,
+                    "y" -> lawnmower.finalPosition.coordinate.y
+                  ),
+                  "direction" -> lawnmower.finalPosition.orientation
                 )
-            }
-          )
-        )
-      }
-
+              )
+          }
+      )
     }
-
   }
 
   /*implicit val lawnmowerSerializer

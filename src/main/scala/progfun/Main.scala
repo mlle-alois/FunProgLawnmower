@@ -11,26 +11,16 @@ object Main extends App {
 
   private val inputParser = new InputParser
   private val input = inputParser.parse(inputFile)
-  val lawnmowers = collection.mutable.Map[Lawnmower, Position]()
-  input.lawnmowers.foreach(lawnmower => {
-    val finalPosition = lawnmower.followInstructions(input.grass)
-    val added = lawnmowers.put(lawnmower, finalPosition)
-    added match {
-      case Some(_) =>
-        println("Already exists")
-      case None =>
-        println("Successfully added")
-    }
-    println(finalPosition.coordinate.x)
-    println(finalPosition.coordinate.y)
-    println(finalPosition.orientation)
 
-  })
+  //val lawnmowers = collection.mutable.Map[Lawnmower, Position]()
+
+  val lawnmowers = for (lawnmower <- input.lawnmowers) yield lawnmower.copy(finalPosition = lawnmower.followInstructions(input.grass))
+  println(lawnmowers(0).finalPosition.coordinate.y)
 
   private val outputTypeChoice = conf.getString("appplication.output-type-choice")
   outputTypeChoice match {
     case "json" => {
-     // val jsonOutput = new JsonOutput(input.grass, lawnmowers.toMap)
+      // val jsonOutput = new JsonOutput(input.grass, lawnmowers.toMap)
     }
     case "yaml" => {
     }

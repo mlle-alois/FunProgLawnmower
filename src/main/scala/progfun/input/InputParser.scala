@@ -33,7 +33,7 @@ class InputParser() {
       val coordinate = new Coordinate(coordinates(0).toInt, coordinates(1).toInt)
       val orientation = coordinates(2)
       val instructions = new Instructions(lawnmower(1))
-      new Lawnmower(new Position(coordinate, orientation), instructions)
+      new Lawnmower(new Position(coordinate, orientation), instructions, new Position(new Coordinate(0, 0), "N"))
     }).toList
   }
 }

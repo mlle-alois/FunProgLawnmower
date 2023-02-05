@@ -1,6 +1,6 @@
 package progfun
 
-class Lawnmower(val currentPosition: Position, val instructions: Instructions, val finalPosition: Position) {
+case class Lawnmower(currentPosition: Position, instructions: Instructions, finalPosition: Position) {
   def followInstructions(grass: Grass): Position = {
     instructions.value.foldLeft(currentPosition) { (position, instruction) =>
       instruction match {
@@ -18,7 +18,7 @@ class Lawnmower(val currentPosition: Position, val instructions: Instructions, v
       case "S" => new Coordinate(position.coordinate.x, position.coordinate.y - 1)
       case "W" => new Coordinate(position.coordinate.x - 1, position.coordinate.y)
     }
-    if(grass.isInside(newCoordinate)) {
+    if (grass.isInside(newCoordinate)) {
       new Position(newCoordinate, position.orientation)
     } else {
       position
