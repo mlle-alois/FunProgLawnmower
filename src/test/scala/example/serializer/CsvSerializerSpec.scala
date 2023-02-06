@@ -2,10 +2,10 @@ package example.serializer
 
 import org.scalatest.funsuite.AnyFunSuite
 import progfun._
-import progfun.serializer.CSVSerializer
-import progfun.serializer.CSVSerializer.lawnmowersSerializer
+import progfun.serializer.CsvSerializer
+import progfun.serializer.CsvSerializer.lawnmowersSerializer
 
-class CSVSerializerSpec extends AnyFunSuite {
+class CsvSerializerSpec extends AnyFunSuite {
 
   test("Should create a csv object") {
     val grass: Grass = new Grass(5, 5)
@@ -19,7 +19,7 @@ class CSVSerializerSpec extends AnyFunSuite {
       "1;5;5;1;2;N;1;3;N;GAGAGAGAA;\n" +
       "2;5;5;3;3;E;5;1;E;AADAADADDA;\n"
 
-    val csvValue = CSVSerializer.serialize(grass, lawnmowers)
+    val csvValue = CsvSerializer.serialize(grass, lawnmowers)
 
     assert(csvValue === result)
   }

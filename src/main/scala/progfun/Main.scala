@@ -4,7 +4,7 @@ import com.typesafe.config.{Config, ConfigFactory}
 import progfun.input.InputParser
 import progfun.output.FileGenerator
 import progfun.output.FileGenerator.jsonFileGenerator
-import progfun.serializer.{CSVSerializer, JsonSerializer}
+import progfun.serializer.{CsvSerializer, JsonSerializer, YamlSerializer}
 
 object Main extends App {
 
@@ -22,12 +22,11 @@ object Main extends App {
       import progfun.serializer.JsonSerializer.lawnmowersSerializer
       JsonSerializer.serialize(input.grass, lawnmowers)
     case "yaml" =>
-      //      import progfun.serializer.YamlSerializer.lawnmowersSerializer
-      //      YamlSerializer.serialize(input.grass, lawnmowers)
-      ""
+      import progfun.serializer.YamlSerializer.lawnmowersSerializer
+      YamlSerializer.serialize(input.grass, lawnmowers)
     case "csv" => {
-      import progfun.serializer.CSVSerializer.lawnmowersSerializer
-      CSVSerializer.serialize(input.grass, lawnmowers)
+      import progfun.serializer.CsvSerializer.lawnmowersSerializer
+      CsvSerializer.serialize(input.grass, lawnmowers)
     }
     case _ =>
       println("Invalid output type choice")

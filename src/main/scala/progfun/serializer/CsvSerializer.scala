@@ -2,7 +2,7 @@ package progfun.serializer
 
 import progfun.{Grass, Lawnmower}
 
-object CSVSerializer {
+object CsvSerializer {
   // serialize dynamique
   def serialize[A, B](grass: A, lawnmowers: B)(
     implicit serializer: OutputSerializer[A, B, String]
