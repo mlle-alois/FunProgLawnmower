@@ -5,9 +5,6 @@ import progfun._
 import progfun.exception.IncorrectDataException
 
 class InputParser() {
-
-  //TODO check que la tondeuse est bien dans la pelouse
-  //TODO interaction avec les fichiers en dehors du parser
   @SuppressWarnings(Array("org.wartremover.warts.Throw"))
   def parse(fileName: String): Input = {
     try {
